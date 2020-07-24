@@ -1,7 +1,5 @@
 package Principal;
 
-import java.util.Scanner;
-
 /**
  *
  * @author aguare
@@ -9,21 +7,25 @@ import java.util.Scanner;
 public class Main {
 
     private static String[] respuestas;
+    private String respuesta;
 
-    public static void main(String[] args) {
-        Scanner leer = new Scanner(System.in);
+    public Main(String sA, String sB) {
         respuestas = new String[1];
-        String sA;
-        String sB;
-
-        System.out.println("Ingrese la Secuencia A: ");
-        sA = leer.nextLine();
-        System.out.println("Ingrese la Secuencia B: ");
-        sB = leer.nextLine();
         separarCaracteres(sA, sB);
+        obtenerRespuesta();
     }
 
-    private static void separarCaracteres(String sA, String sB) {
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    /**
+     * Se separa la cadena de texto recibidas para luego ser comparadas
+     *
+     * @param sA cadena de texto 1
+     * @param sB cadena de texto 2
+     */
+    private void separarCaracteres(String sA, String sB) {
         char[] sec1 = new char[sA.length()];
         char[] sec2 = new char[sB.length()];
 
@@ -34,9 +36,7 @@ public class Main {
         for (int i = 0; i < sB.length(); i++) {
             sec2[i] = sB.charAt(i);
         }
-
         obtenerConjunto(sec1, sec2);
-        System.out.println(obtenerRespuesta());
     }
 
     private static void obtenerConjunto(char[] sec1, char[] sec2) {
@@ -80,13 +80,13 @@ public class Main {
         System.arraycopy(copia, 0, respuestas, 0, copia.length);
     }
 
-    private static String obtenerRespuesta() {
+    private void obtenerRespuesta() {
         String r = "";
         for (int i = 0; i < respuestas.length - 1; i++) {
             if (r.length() < respuestas[i].length()) {
                 r = respuestas[i];
             }
         }
-        return r;
+        this.respuesta = r;
     }
 }
